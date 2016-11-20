@@ -56,17 +56,17 @@ No Man's Asteroids is a definite 'for fun' game, but it was made for a few very 
 	I'll be including a specific licensing with this project on Github, but in case you're confused, on
 	whether you can use these assets and code in your project, please refer to these (vague) guidelines.
 
-#	1. You can use any of my assets without restrictions, commercial or otherwise. In other words, any use
+	1. You can use any of my assets without restrictions, commercial or otherwise. In other words, any use
 	of these files is generally fine by me. If you're unsure, shoot me an email or tweet, and I'll let you know.
 	
 	
 	
-#	2. You must credit me in any re-release of these files, code, or assets. A link to my website (http://Enemby.com/),
+	2. You must credit me in any re-release of these files, code, or assets. A link to my website (http://Enemby.com/),
 	or something similar to that is fine. 
 	
 	
 
-#	3. Be excellent to eachother!
+	3. Be excellent to eachother!
 
 
 
