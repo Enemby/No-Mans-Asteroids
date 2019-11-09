@@ -6,6 +6,7 @@ Included in these folders are things not seen in the actual game. Tons of unused
                        
 
 This is the prototype that became Metori, so it's pretty complex, real talk.
+Use of this project will likely require Unity 5.0, Monodevelop, and GIMP2.0 to be able to access all files.
 No Man's Asteroids is a definite 'for fun' game, but it was made for a few very real purposes:
 
 
