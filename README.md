@@ -5,7 +5,7 @@ Included in these folders are things not seen in the actual game. Tons of unused
 ##  About the game     
                        
 
-
+This is the prototype that became Metori, so it's pretty complex, real talk.
 No Man's Asteroids is a definite 'for fun' game, but it was made for a few very real purposes:
 
 
