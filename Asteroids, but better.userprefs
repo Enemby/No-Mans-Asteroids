@@ -1,15 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\My Assets\Scripts\Gameplay\Player\PlayerShip.js">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\My Assets\Scripts\UI\titlescreen.js">
     <Files>
-      <File FileName="Assets\My Assets\Scripts\Gameplay\Player\PlayerShip.js" Line="204" Column="109" />
-      <File FileName="Assets\My Assets\Scripts\E3.js" Line="1" Column="1" />
-      <File FileName="Assets\My Assets\Scripts\Gameplay\Enemies\enemyShip.js" Line="1" Column="1" />
-      <File FileName="Assets\My Assets\Scripts\Gameplay\Shop\Shop.js" Line="1" Column="1" />
+      <File FileName="Assets\My Assets\Scripts\UI\MusicInstance.js" Line="1" Column="1" />
+      <File FileName="Assets\My Assets\Scripts\UI\Options.js" Line="1" Column="1" />
       <File FileName="Assets\My Assets\Scripts\Gameplay\Player\PlayerManager.js" Line="1" Column="1" />
-      <File FileName="Assets\My Assets\Scripts\Game.js" Line="18" Column="2" />
-      <File FileName="Assets\My Assets\Scripts\UI\Fade.js" Line="1" Column="1" />
-      <File FileName="Assets\My Assets\Scripts\UI\titlescreen.js" Line="1" Column="1" />
+      <File FileName="Assets\My Assets\Scripts\UI\titlescreen.js" Line="11" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

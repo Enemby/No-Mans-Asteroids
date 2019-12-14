@@ -5,8 +5,14 @@ enum ShipType {
 	Kamikaze = 2, //AI only?
 	Carrier = 3, //Spawns ships
 	Supressor = 4, //Freezes other ships (We might not do this)
-	Station = 5,
-	Turret = 6
+	Station = 5, //Hub Shop
+	Turret = 6, //Base Protection
+	NonCombatant = 7
+}
+enum CommanderType {
+	Defensive = 0,
+	Aggressive = 1,
+	Balanced = 2
 }
 enum AIMode{ //Actions other squad members will take when not selected....
 	Sentry = 0, //Stop and fire at nearby enemies/asteroids

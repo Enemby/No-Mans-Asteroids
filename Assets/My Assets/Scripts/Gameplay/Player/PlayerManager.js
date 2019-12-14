@@ -5,6 +5,8 @@ var mineralsUI : UI.Text;
 var controlsUI : GameObject;
 var aiUI : UI.Text;
 var myAI : AIMode = 0;
+var squadUI : UI.Text;
+//var myOptions :GameObject;
 function Start(){
 	if(PlayerPrefs.HasKey("Minerals") == false){ //Yo, you got that written down dawg?
 		PlayerPrefs.SetInt("Minerals",0);
@@ -13,6 +15,7 @@ function Start(){
 	else{ //What it say tho
 		minerals = PlayerPrefs.GetInt("Minerals"); //I hear you homie
 	}
+	setAIUI();
 }
 function setMineralUI(){
 	mineralsUI.text = "Minerals: "+minerals;
@@ -39,6 +42,11 @@ function Update(){
 	if(Input.GetKeyDown("/")){
 		Application.Quit();
 	}
+	if(Input.GetButtonDown("Menu") && GameObject.FindGameObjectWithTag("PauseMenu") == null){
+		var async : AsyncOperation = Application.LoadLevelAdditiveAsync ("options");
+		//yield async;
+		Debug.Log ("Loading complete");
+	}
 	if(Input.GetButtonDown("AIMode")){
 		myAI+=1;
 		if(myAI > 2){
@@ -49,9 +57,12 @@ function Update(){
 	if(Input.GetButtonDown("Controls")){
 		if(controlsUI.active == true){
 			controlsUI.active = false;
+			PlayerPrefs.SetInt("Controls",0);
 		}
 		else{
 			controlsUI.active = true;
+			PlayerPrefs.SetInt("Controls",1);
 		}
+		PlayerPrefs.Save();
 	}
 }
