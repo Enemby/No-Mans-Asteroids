@@ -1,55 +1,10 @@
-Hey! If you're reading this, you've downloaded the source code and assets for my game, "No Man's Asteroids".
+Hey! If you're reading this, you've downloaded the source code and assets for my game, "Metori".
 Included in these folders are things not seen in the actual game. Tons of unused graphics, some audio I didn't end up putting in (but was made for this game)
 
 
 ##  About the game     
                        
-
-This is the prototype that became Metori, so it's pretty complex, real talk.
-Use of this project will likely require Unity 5.0, Monodevelop, and GIMP2.0 to be able to access all files.
-No Man's Asteroids is a definite 'for fun' game, but it was made for a few very real purposes:
-
-
-
-
-	1. I have no decent portfolio pieces, and I needed to make something I could be proud of.
-	
-	
-	
-	
-	2. I'm unsure of my fan following, and needed a "test release" to gage the state of things.
-	
-	
-	
-	
-	3. Taking it easy sometimes is extremely needed for the human psyche. This serves as a bit of a "break
-	for me.
-	
-	
-	
-	
-
-	If you're interested in more in-depth reasoning, Please refer to these blog posts on my site:
-	
-	
-	
-	
-		- Announcing The Asteroids Game: http://enembydev.tumblr.com/post/151873041427/no-mans-asteroids-probably
-		
-		
-		
-		- The Fanbase Problem: http://enembydev.tumblr.com/post/152146126447/supplydemand-the-fanbase-problem
-		
-		
-		
-		
-	Thanks!
-	
-	
-	
--Enemby
-
-
+Metori was a game I made on Steam. It's open source now. Check the "master" branch for more information.
 
 ##   Use of game assets                              
 
@@ -58,7 +13,9 @@ No Man's Asteroids is a definite 'for fun' game, but it was made for a few very 
 	whether you can use these assets and code in your project, please refer to these (vague) guidelines.
 
 	1. You can use any of my assets without restrictions, commercial or otherwise. In other words, any use
-	of these files is generally fine by me. If you're unsure, shoot me an email or tweet, and I'll let you know.
+	of my files is generally fine by me. If you're unsure, shoot me an email or tweet, and I'll let you know.
+	
+	Anything in "3rd party assets" wasn't made by me, and you'll need permission from them to use it. It's organized with credits.
 	
 	
 	
