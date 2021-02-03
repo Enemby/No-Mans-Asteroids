@@ -1,3 +1,21 @@
-Base path: C:/Program Files (x86)/Unity5/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-16360
+Base path: C:/Program Files/Unity/Editor/Data
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-10916
 Cmd: getPlatforms
+Cmd: compileSnippet
+  api=0 type=0 insize=1647 outsize=1552 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1647 outsize=6 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1360 outsize=1246 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1360 outsize=6 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=0 insize=1571 outsize=1542 kw= ok=1
+Cmd: compileSnippet
+  api=0 type=1 insize=1571 outsize=6 kw= ok=1
+Cmd: compileSnippet
+  error: 2 plat 0 at (17): 'uint' : syntax error parse error\nCompiling Vertex program
+  api=0 type=0 insize=2076 outsize=0 kw= ok=0
+Cmd: compileSnippet
+  error: 2 plat 0 at (17): 'uint' : syntax error parse error\nCompiling Vertex program
+  api=0 type=0 insize=2076 outsize=0 kw= ok=0

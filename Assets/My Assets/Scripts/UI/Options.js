@@ -10,6 +10,24 @@ function setFloatPref(myvalue : float){
 		PlayerPrefs.Save();
 	}
 }
+function setIntPref(myvalue : int){
+	if( mypref != "" && mypref != null){
+		PlayerPrefs.SetInt(mypref,myvalue);
+		PlayerPrefs.Save();
+	}
+}
+function setIntTogglePref(){
+	if( mypref != "" && mypref != null){
+		if(PlayerPrefs.GetInt(mypref) == 1){
+			PlayerPrefs.SetInt(mypref,0);
+			PlayerPrefs.Save();
+		}
+		else{
+			PlayerPrefs.SetInt(mypref,1);
+			PlayerPrefs.Save();
+		}
+	}
+}
 function closeMenu(){
 	canvasObject.active = false;
 	pauseMenu.active = true;

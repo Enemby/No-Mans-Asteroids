@@ -3,6 +3,14 @@ var interval : int = 0;
 var nextScene : String;
 var loadingText : GameObject;
 var myTimer : float = 0;
+function Start(){
+	EffectsCheck();
+}
+function EffectsCheck(){
+	if(PlayerPrefs.GetInt("EffectsCheck") == 0){
+		GameObject.Find("Main Camera").GetComponent("Tube").enabled = false;
+	}
+}
 function Update(){
 	myTimer+=Time.deltaTime;
 	if(myTimer >= 2){
