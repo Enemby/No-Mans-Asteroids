@@ -1,5 +1,0 @@
-chaching.wav : http://freesound.org/people/creek23/sounds/75235/
-explosion.wav : http://freesound.org/people/usernamenumber/sounds/331369/
-Dock.wav : http://freesound.org/people/dobroide/sounds/86733/
-
-fire, and fire-old1 were both made by me and can be used under the same terms as the rest of the project.
