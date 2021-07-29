@@ -6,7 +6,7 @@ private var active : boolean = true;
 private var percentage : float = 0;
 private var startMinerals : float = 0;
 function OnCollisionEnter2D(myCol : Collision2D){
-	if(myCol.gameObject.tag == "Bullet"){
+	if(myCol.gameObject.tag == "Bullet"||myCol.gameObject.tag == "EnemyBullet"){
 		Destroy(myCol.gameObject);
 		if(this.gameObject.transform.childCount > 0){
 			for(i=0;i < this.gameObject.transform.childCount;i++){

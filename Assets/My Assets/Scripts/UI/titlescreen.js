@@ -5,6 +5,7 @@ var playPanel : GameObject;
 var optionsPanel : GameObject;
 var levelToLoad : String = "tutorial";
 var instantLevelToLoad : String = "instantaction";
+var loadingText : GameObject;
 //Quick and dirty titlescreen.
 function Play(){
 	menuPanel.active = false;
@@ -47,6 +48,7 @@ function AsteroidsUpdate(mycount:String){
 	PlayerPrefs.Save();
 }
 function InstantActionStart(){
+	loadingText.active = true;
 	Application.LoadLevel(instantLevelToLoad);
 }
 function OldUpdate(){
@@ -101,12 +103,6 @@ function setInit(){ //check our initial prefs if not set set them.
 	}
 	if(!PlayerPrefs.HasKey("Controls")){
 		PlayerPrefs.SetInt("Controls",1);
-	}
-	if(!PlayerPrefs.HasKey("GlitchToggle")){
-		PlayerPrefs.SetInt("GlitchToggle",1);
-	}
-	if(!PlayerPrefs.HasKey("EffectsCheck")){
-		PlayerPrefs.SetInt("EffectsCheck",1);
 	}
 	PlayerPrefs.Save();
 }

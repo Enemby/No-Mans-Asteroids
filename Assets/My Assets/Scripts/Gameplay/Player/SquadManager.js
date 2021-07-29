@@ -4,6 +4,7 @@ private var selectedShip : GameObject; //Ship we have selected
 var squadSelected : boolean = false;
 var basicShip : GameObject;
 var allowEmpty : boolean = false; //Should we let the squad be empty?
+var myCam : GameObject;
 function Start(){
 	InvokeRepeating("respawnCheck",0.0f,4.0);
 }
@@ -27,9 +28,14 @@ function respawnCheck(){
 	}
 }
 function checkSelection(){
-	if(this.transform.childCount > 0){
+	if(this.transform.childCount >= 1){
 		if(this.transform.GetChild(selectedIndex) != null){
-			this.transform.GetChild(selectedIndex).GetComponent("PlayerShip").selected = true;
+			if(this.transform.GetChild(selectedIndex).GetComponent("PlayerShip")){
+				this.transform.GetChild(selectedIndex).GetComponent("PlayerShip").selected = true;
+			}
+			else{
+				this.transform.GetChild(selectedIndex).GetComponent("PlayerLocalMP").selected = true;
+			}
 			shipSelected = true;
 		}
 		else{
@@ -52,15 +58,24 @@ function clearSelection(){
 	if(this.transform.childCount > 0){
 		shipSelected = false;
 		for(var i = 0;i < this.transform.childCount;i++){
-			this.transform.GetChild(selectedIndex).GetComponent("PlayerShip").selected == false;
-			this.transform.GetChild(i).GetComponent("PlayerShip").selected == false;
+			if(this.transform.GetChild(selectedIndex).GetComponent("PlayerShip")){
+				this.transform.GetChild(selectedIndex).GetComponent("PlayerShip").selected == false;
+			}
+			if(this.transform.GetChild(i).GetComponent("PlayerShip")){
+				this.transform.GetChild(i).GetComponent("PlayerShip").selected == false;
+			}
 		}
 	}
 }
 function setCameraTarget(){
 	if(this.transform.childCount > 0){
 		selectedShip = this.transform.GetChild(selectedIndex).gameObject;
-		GameObject.FindGameObjectWithTag("MainCamera").GetComponent("Follow Player").target = selectedShip;
+		if(myCam == null){
+			GameObject.FindGameObjectWithTag("MainCamera").GetComponent("Follow Player").target = selectedShip;
+			}
+			else{
+				myCam.GetComponent("Follow Player").target = selectedShip;
+			}
 	}
 }
 function switchSelected(){

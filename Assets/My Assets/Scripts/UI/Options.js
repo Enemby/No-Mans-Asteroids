@@ -16,16 +16,12 @@ function setIntPref(myvalue : int){
 		PlayerPrefs.Save();
 	}
 }
-function setIntTogglePref(){
-	if( mypref != "" && mypref != null){
-		if(PlayerPrefs.GetInt(mypref) == 1){
-			PlayerPrefs.SetInt(mypref,0);
-			PlayerPrefs.Save();
-		}
-		else{
-			PlayerPrefs.SetInt(mypref,1);
-			PlayerPrefs.Save();
-		}
+function ToggleIntPref(prefset : String){
+	if(PlayerPrefs.GetInt(prefset) == 1){
+		PlayerPrefs.SetInt(prefset,0);
+	}
+	else{
+		PlayerPrefs.SetInt(prefset,1);
 	}
 }
 function closeMenu(){

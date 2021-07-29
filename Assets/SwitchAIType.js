@@ -25,7 +25,10 @@ function loopCheck(){
 }
 function setText(){
 	myUI.text = text[myValue];
-	var myInt = int.Parse(myUI.text);
-	PlayerPrefs.SetInt(myPref, myInt);
-	PlayerPrefs.Save();
+	var output : int;
+	if(int.TryParse(text[myValue],output)){
+		var myInt = int.Parse(text[myValue]);
+		PlayerPrefs.SetInt(myPref, myInt);
+		PlayerPrefs.Save();
+	}
 }

@@ -97,7 +97,7 @@ function DesperationCheck(){//Assess Resources, make a plan.
 			else{
 				for(i=0;i<myCurrentShips.Length;i++){
 					if(playerStations.Length <= 0){
-						setShipTarget(myCurrentShips[i],playerStations[0].gameObject);
+						setShipTarget(myCurrentShips[i],GameObject.FindGameObjectWithTag("SelectedShip"));
 					}
 				}
 			}

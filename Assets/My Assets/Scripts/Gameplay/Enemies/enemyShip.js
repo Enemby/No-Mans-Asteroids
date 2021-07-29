@@ -120,6 +120,17 @@ function LateUpdate () {
 				if(target == null){
 					scanForTargets();
 				}
+				else{//If we have a target..
+					if(Vector3.Distance(this.transform.position,GameObject.FindGameObjectWithTag("SelectedShip").transform.position) < 100){
+							target = GameObject.FindGameObjectWithTag("SelectedShip");
+					}
+					var playerships = GameObject.FindGameObjectsWithTag("Ship");
+					for(var i = 0;i < playerships.Length;i++){
+						if(Vector3.Distance(this.transform.position,playerships[i].transform.position) < 100){
+							target = playerships[i];
+						}
+					}
+				}
 			}
 			if(target != null){ //Stop from throwing errors at start.
 				//var targetTransform = target.transform.position - transform.position;
@@ -185,9 +196,9 @@ function Fire(){ //Shoot a bullet, No Caching! :(
 			var myBullet = Instantiate(bullet,this.transform.position, Quaternion.identity);
 			Physics2D.IgnoreCollision(myBullet.GetComponent(BoxCollider2D),this.GetComponent(BoxCollider2D));
 			if(myRigidbody.velocity.magnitude > 1){
-				myBullet.GetComponent(Rigidbody2D).velocity = myRigidbody.velocity;
+				//myBullet.GetComponent(Rigidbody2D).velocity = myRigidbody.velocity;
 			}
-			myBullet.GetComponent(Rigidbody2D).AddForce(this.transform.up*fireForce);
+			myBullet.GetComponent(Rigidbody2D).AddForce(this.transform.up*fireForce*myRigidbody.velocity.magnitude*0.1);
 		}
 		if(myType == 3){ //Carrier!
 			

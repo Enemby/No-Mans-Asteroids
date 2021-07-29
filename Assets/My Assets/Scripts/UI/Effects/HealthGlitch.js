@@ -56,10 +56,26 @@ function setNoiseIntensity(){
 		noiseScript.scratchIntensityMax = 10/calculatePercentage();
 	}
 }
+function EffectsCheck(myval : boolean){
+	if(myval == true){
+		noiseScript.enabled = true;
+		glitchScript.enabled = true;
+	}
+	else{
+		noiseScript.enabled = false;
+		glitchScript.enabled = false;
+	}
+}
 function Update(){
 	UpdateReferences();
 	if(calculatePercentage() <= 50){
 		timerUpdate();
 	}
 	setNoiseIntensity();
+	if(PlayerPrefs.GetInt("EffectsCheck") == 1){
+		EffectsCheck(true);
+	}
+	else{
+		EffectsCheck(false);
+	}
 }

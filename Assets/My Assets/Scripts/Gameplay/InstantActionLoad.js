@@ -2,6 +2,7 @@
 var player : GameObject;
 var enemyShip : GameObject;
 var spawnDistance : float = 400;
+var localMP : boolean = false;
 private var asteroidGen : GameObject;
 private var eCommander : GameObject;
 private var stationCount;
@@ -12,13 +13,17 @@ function setReferences(){ //Update our references (this saves frames)
 function setSettings(){ //Set Instant Action Preferences from the menu
 	asteroidGen.GetComponent("generateField").asteroids = PlayerPrefs.GetInt("IA_ASTEROIDS");
 	asteroidGen.GetComponent("generateField").spawnRange = PlayerPrefs.GetInt("IA_DENSITY");
-	eCommander.GetComponent("AICommander").myType = PlayerPrefs.GetInt("IA_AITYPE");
+	if(eCommander){
+		eCommander.GetComponent("AICommander").myType = PlayerPrefs.GetInt("IA_AITYPE");
+	}
 	stationCount = PlayerPrefs.GetInt("IA_STATIONS");
 }
 function Awake(){//On scene load, do this:
 	setReferences();
 	setSettings();
-	spawnMap();
+	if(localMP == false){
+		spawnMap();
+	}
 }
 function spawnMap(){
 	for(i = 0;i< stationCount-1;i++){
