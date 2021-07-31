@@ -82,8 +82,10 @@ function DesperationCheck(){//Assess Resources, make a plan.
 				//Debug.Log("Found Ships!");
 				var everyShip = myCurrentShips;
 				var targetStation = closestTarget(neutralStations,5000);
-				for(i=0;i<everyShip.Length;i++){
-					setShipTarget(everyShip[i],targetStation);
+				if(targetStation){
+					for(i=0;i<everyShip.Length;i++){
+						setShipTarget(everyShip[i],targetStation);
+					}
 				}
 			}
 		}

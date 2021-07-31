@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\LocalMP.js" />
      <Compile Include="Assets\My Assets\Scripts\AI\AICommander.js" />
      <Compile Include="Assets\My Assets\Scripts\E3.js" />
      <Compile Include="Assets\My Assets\Scripts\Game.js" />
@@ -55,6 +56,8 @@
      <Compile Include="Assets\My Assets\Scripts\Gameplay\Enemies\SpinEnemy.js" />
      <Compile Include="Assets\My Assets\Scripts\Gameplay\Enemies\enemyShip.js" />
      <Compile Include="Assets\My Assets\Scripts\Gameplay\InstantActionLoad.js" />
+     <Compile Include="Assets\My Assets\Scripts\Gameplay\LocalMP\lookAtTargetTag2D.js" />
+     <Compile Include="Assets\My Assets\Scripts\Gameplay\Player\PlayerLocalMP.js" />
      <Compile Include="Assets\My Assets\Scripts\Gameplay\Player\PlayerManager.js" />
      <Compile Include="Assets\My Assets\Scripts\Gameplay\Player\PlayerShip.js" />
      <Compile Include="Assets\My Assets\Scripts\Gameplay\Player\SquadManager.js" />
@@ -95,7 +98,6 @@
      <Compile Include="Assets\My Assets\Scripts\UI\Options.js" />
      <Compile Include="Assets\My Assets\Scripts\UI\SquadText.js" />
      <Compile Include="Assets\My Assets\Scripts\UI\titlescreen.js" />
-     <Compile Include="Assets\SetTogglePref.js" />
      <Compile Include="Assets\SwitchAIType.js" />
      <Compile Include="Assets\UITextTimer.js" />
      <None Include="Assets\My Assets\README.txt" />

@@ -178,18 +178,28 @@ function AIScanForMinerals(){ //Clone scanForEnemies, just with a different tag.
 				lowestDistance = Vector3.Distance(targets[i].transform.position,this.transform.position);
 			}
 		}
-		target = targets[ourTarget]; //Target found. Let's move on to the next thing!
+		if(target == null){
+		
+			target = targets[ourTarget]; //Target found. Let's move on to the next thing!
+		}
+		else{
+			if(target.tag != "MineralAsteroid"){
+				target = null;
+			}
+		}
 	}
 	else{
 		target = null;
 	}
 }
 function AIMoveToTarget(){ //Move to target, with lazy spacing.
-	this.transform.up = target.transform.position - transform.position; //Lazy 2D look at
-	this.transform.rotation.eulerAngles.x = 0;
-	myRigidbody.AddForce(this.transform.up * speed);
-	if(Vector3.Distance(this.transform.position,target.transform.position) <= 5){
-		myRigidbody.AddForce(-this.transform.up * speed); //The most lazy fix ever. This is how Half Life 2 "Limited" velocity. Except y'know, 3D.
+	if(target != null){
+		this.transform.up = target.transform.position - transform.position; //Lazy 2D look at
+		this.transform.rotation.eulerAngles.x = 0;
+		myRigidbody.AddForce(this.transform.up * speed);
+		if(Vector3.Distance(this.transform.position,target.transform.position) <= 5){
+			myRigidbody.AddForce(-this.transform.up * speed); //The most lazy fix ever. This is how Half Life 2 "Limited" velocity. Except y'know, 3D.
+		}
 	}
 }
 function myAIUpdate(){ //Check AI Mode, Ship Type, and act accordingly.
@@ -366,7 +376,7 @@ function shopInput(){
 		//So we just pretend 0 doesn't exist, and extend our array arbitrarily. Lazy.
 		if(Input.GetKeyDown(i+"")){
 			if(GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals >= prices[i]){
-				var myShip = Instantiate(ships[i],this.transform.position,Quaternion.identity);
+				var myShip = Instantiate(ships[i],this.transform.position+Vector3(Random.Range(0,5),Random.Range(0,5),0),Quaternion.identity);
 				GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals-=prices[i];
 				myShip.transform.parent = null; //Don't set parents, kids!
 				this.GetComponent(AudioSource).PlayOneShot(buySound,1);

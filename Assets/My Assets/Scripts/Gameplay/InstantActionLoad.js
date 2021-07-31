@@ -31,7 +31,7 @@ function spawnMap(){
 			player.transform.position = Vector3(-20,0,0);
 		}
 		Instantiate(neutralStation,Vector3(i*spawnDistance,0,0),Quaternion.identity);
-		if(i == stationCount-1){
+		if(i >= stationCount-2){
 			enemyShip.transform.position = Vector3(i*spawnDistance+10,0,0);
 		}
 	}

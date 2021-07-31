@@ -53,8 +53,8 @@ function Fire(){ //Shoot a bullet, or catch an Asteroid in a Harvester. No Cachi
 function shipInput(){ //Check for button presses, act accordingly.
 	//Movement
 	if(allowInput == true){
-		this.transform.localRotation.eulerAngles.z -= Input.GetAxisRaw("Horizontal Player 2") * turnSpeed *Time.deltaTime*14;
-		myRigidbody.AddForce(this.transform.up*Input.GetAxisRaw("Vertical Player 2")*speed); //2D physics
+		this.transform.localRotation.eulerAngles.z -= Input.GetAxisRaw("HorizontalP2") * turnSpeed *Time.deltaTime*14;
+		myRigidbody.AddForce(this.transform.up*Input.GetAxisRaw("VerticalP2")*speed); //2D physics
 		if(Input.GetButton("SlowP2")){
 			myRigidbody.velocity*=0.9;
 		}
