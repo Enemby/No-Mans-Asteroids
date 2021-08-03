@@ -60,6 +60,9 @@ function updateUI(){
 			if(myRB.velocity.magnitude >= 5){
 				myRB.velocity*=0.9;
 			}
+			else{
+				myRB.velocity = Vector3.zero;
+			}
 		}
 	}
 	if(Vector3.Distance(this.transform.position,Vector3.zero) >= 5000){

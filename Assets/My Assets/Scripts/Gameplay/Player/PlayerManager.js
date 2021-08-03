@@ -39,13 +39,11 @@ function setAIUI(){ //Set our AI State UI.
 }
 function Update(){
 	setMineralUI();
-	if(Input.GetKeyDown("/")){
-		Application.Quit();
-	}
 	if(Input.GetButtonDown("Menu") && GameObject.FindGameObjectWithTag("PauseMenu") == null){
 		var async : AsyncOperation = Application.LoadLevelAdditiveAsync ("options");
 		//yield async;
 		Debug.Log ("Loading complete");
+		Time.timeScale = 0;
 	}
 	if(Input.GetButtonDown("AIMode")){
 		myAI+=1;

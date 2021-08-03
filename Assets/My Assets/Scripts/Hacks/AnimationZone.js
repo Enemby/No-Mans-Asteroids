@@ -19,7 +19,7 @@ function Update(){
 function checkTriggers(){
 	if(checkChildren == true){
 		if(checkChildrenObj.transform.GetChildCount() <= 0){
-			alreadyTriggered = false;
+			//alreadyTriggered = false;
 			Debug.Log("Triggered: " + alreadyTriggered);	
 		}
 	}

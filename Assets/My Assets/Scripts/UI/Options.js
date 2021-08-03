@@ -23,6 +23,7 @@ function ToggleIntPref(prefset : String){
 	else{
 		PlayerPrefs.SetInt(prefset,1);
 	}
+	PlayerPrefs.Save();
 }
 function closeMenu(){
 	canvasObject.active = false;
@@ -33,6 +34,7 @@ function openMenu(){
 	pauseMenu.active = false;
 }
 function deleteMenu(){
+	Time.timeScale = 1;
 	Destroy(canvasObject.gameObject.transform.root.gameObject);
 	Destroy(this.gameObject);
 }

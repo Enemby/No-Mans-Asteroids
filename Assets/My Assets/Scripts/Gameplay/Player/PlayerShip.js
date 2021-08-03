@@ -39,12 +39,15 @@ function Start(){
 function AIFollowPlayer(){ //Move towards player position. Lazily attempt to keep a 20m distance.
 	if(	GameObject.FindGameObjectWithTag("SelectedShip") != null){
 		var target = GameObject.FindGameObjectWithTag("SelectedShip");
+		var targetRB = target.GetComponent("Rigidbody2D");
 		//this.transform.LookAt(target.transform);
 		this.transform.up = target.transform.position - transform.position; //Lazy 2D look at
 		this.transform.rotation.eulerAngles.x = 0;
 		myRigidbody.AddForce(this.transform.up * speed);
 		if(Vector3.Distance(this.transform.position,target.transform.position) <= 20){
-			myRigidbody.AddForce(-this.transform.up * speed); //The most lazy fix ever. This is how Half Life 2 "Limited" velocity. Except y'know, 2D.
+			if(myRigidbody.velocity.magnitude > targetRB.velocity.magnitude){
+				myRigidbody.velocity*=0.9; //Slow down to target's speed when in range.
+			}
 		}
 	}
 }

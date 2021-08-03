@@ -1,15 +1,9 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-9092
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-13528
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=1 type=0 insize=1647 outsize=187 kw= ok=1
-Cmd: compileSnippet
-  api=1 type=0 insize=1360 outsize=187 kw= ok=1
-Cmd: compileSnippet
   error: 2 plat 0 at (17): 'uint' : syntax error parse error\nCompiling Vertex program with UNITY_COLORSPACE_GAMMA
-  api=0 type=0 insize=2076 outsize=0 kw=UNITY_COLORSPACE_GAMMA ok=0
-Cmd: compileSnippet
-  api=1 type=1 insize=2076 outsize=2529 kw= ok=1
+  api=0 type=0 insize=2007 outsize=0 kw=UNITY_COLORSPACE_GAMMA ok=0
 Unhandled exception: Readfile from pipe failed. GLE=The pipe has been ended.
 
 
