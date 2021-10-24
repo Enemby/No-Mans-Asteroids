@@ -87,7 +87,7 @@ No Man's Asteroids is a definite 'for fun' game, but it was made for a few very 
 	
 	
 	
-	2. The original creators of the "Asteriods" game in 1979. (Lyle Rains, Ed Logg, and Dominic Walsh.). These
+	2. The original creators of the "Asteroids" game in 1979. (Lyle Rains, Ed Logg, and Dominic Walsh.). These
 	games formed the basis of what the video game industry is today, and this game especially has an interesting
 	history.
 	
