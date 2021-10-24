@@ -4,6 +4,7 @@ var letterPause : float = 0.2;
 var word : String;
 var progress : int = 0;
 var fade : boolean = true;
+var blipSound: AudioClip;
 private var myText : UI.Text;
 private var textLength : int = 0;
 function Start () {
@@ -13,6 +14,7 @@ function Start () {
 	GetComponent(UI.Text).text = "";
 	TypeText();
 	InvokeRepeating("finishCheck",10,3);
+	
 }
 function finishCheck(){ //Check if we're done.
 	if(progress >= textLength-1){//Time to fade!
@@ -129,5 +131,9 @@ function TypeText () {
                 //make sure the next character isn't ignored
                 ignore = false;
 		yield WaitForSeconds (letterPause);
+		if(blipSound != null){
+			this.GetComponent(AudioSource).clip = blipSound;
+			this.GetComponent(AudioSource).PlayOneShot(blipSound,1);
+		}
 	}
 }

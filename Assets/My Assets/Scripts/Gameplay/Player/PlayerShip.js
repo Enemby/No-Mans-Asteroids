@@ -6,6 +6,8 @@ var bullet : GameObject; //gameobject
 var myRigidbody : Rigidbody2D;
 var fireSound : AudioClip;
 var explosionSound : AudioClip;
+var damagedSound : AudioClip;
+var slowSound:AudioClip;
 var speed : float = 0.1; //How quickly do we accelerate?
 var turnSpeed : float = 1.5; //How fast can we rotate and change orientation?
 var cooldown : float = 0.5; //How long until we can fire our weapon?
@@ -321,6 +323,22 @@ function shipInput(){ //Check for button presses, act accordingly.
 		myRigidbody.AddForce(this.transform.up*Input.GetAxisRaw("Vertical")*speed); //2D physics
 		if(Input.GetButton("Slow")){
 			myRigidbody.velocity*=0.9;
+			if(myRigidbody.velocity.magnitude >= 10){
+				this.GetComponent(AudioSource).clip = slowSound;
+				if(this.GetComponent(AudioSource).isPlaying == false){
+					this.GetComponent(AudioSource).Play();
+					this.GetComponent(AudioSource).loop = true;
+				}
+			}
+			else{
+				this.GetComponent(AudioSource).Stop();
+			}
+		}
+		else{
+			this.GetComponent(AudioSource).Stop();
+			this.GetComponent(AudioSource).loop = false;	
+			this.GetComponent(AudioSource).clip = null;			
+
 		}
 		if(Input.GetButton("Fire")){
 			Fire();
@@ -340,8 +358,9 @@ function Die(){ //Spawn an explosion, and delete the GameObject.
 	var mySound = new GameObject(); //Spawn explosion audio GameObject. Could've sworn there was a better way for this.
 	mySound.transform.position = this.transform.position;
 	mySound.AddComponent(AudioSource);
-	mySound.GetComponent(AudioSource).spatialBlend = 1;
+	mySound.GetComponent(AudioSource).spatialBlend = 0.5;
 	mySound.GetComponent(AudioSource).PlayOneShot(explosionSound, 1);
+	GameObject.FindGameObjectWithTag("MainCamera").BroadcastMessage("ScreenShake");
 	Destroy(mySound, 10); //Cleanup!
 	Destroy(explosion, 20);
 	Destroy(this.gameObject); //This should be changed, probably.
@@ -368,6 +387,13 @@ function OnCollisionEnter2D(mycol : Collision2D){ //Check if we're being hurt/sh
 		shipHealth-=0.5;
 		if(selected == true && checkSquadSelect()){
 			GameObject.FindGameObjectWithTag("MainCamera").BroadcastMessage("ScreenShake");
+			var mySound = new GameObject(); //Spawn explosion audio GameObject. Could've sworn there was a better way for this.
+			mySound.transform.position = this.transform.position;
+			mySound.AddComponent(AudioSource);
+			mySound.GetComponent(AudioSource).spatialBlend = 0;
+			mySound.GetComponent(AudioSource).pitch+=Random.Range(0,1)*0.1;
+			mySound.GetComponent(AudioSource).PlayOneShot(damagedSound, 1);
+			Destroy(mySound, 10); //Cleanup!
 		}
 		Destroy(mycol.gameObject);
 	}
@@ -471,6 +497,13 @@ function updateShop(){
 	}
 }
 //END MOST OF THE STATION CODE
+function FixedUpdate(){
+if(selected == true){
+	if(shipHealth <= maxHealth-0.0001f){
+				shipHealth+=0.0001f;
+			}
+	}
+}
 function Update () { //Called every frame
 	if(shipHealth <= 0){
 		Die();

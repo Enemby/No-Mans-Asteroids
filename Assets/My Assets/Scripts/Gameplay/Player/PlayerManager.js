@@ -21,7 +21,7 @@ function setMineralUI(){
 	mineralsUI.text = "Minerals: "+minerals;
 }
 function setAIUI(){ //Set our AI State UI.
-	var myText = "AI: ";
+	var myText = "Fleet Order: ";
 	if(myAI == 0){
 		myText+="Sentry";
 	}

@@ -52,7 +52,7 @@ function setNoiseIntensity(){
 		noiseScript.scratchIntensityMax = 0;
 	}
 	else{ //This one problem, took me a full hour to figure out. (With help)
-		noiseScript.grainIntensityMax = 100/calculatePercentage()*0.6;
+		noiseScript.grainIntensityMax = 100/calculatePercentage()*0.4;//0.6 is full power
 		noiseScript.scratchIntensityMax = 10/calculatePercentage();
 	}
 }

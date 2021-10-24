@@ -8,6 +8,7 @@ var maxSpeed = 400; //Our MAX speed
 @Header("BulletVars")
 var bullet : GameObject;
 var explosionParticle : GameObject;
+var explosionSound : AudioClip;
 var cooldown : float = 1;
 var fireTimer : float = 0;
 var fireForce : float = 500;
@@ -218,6 +219,13 @@ function randomPatrol(){ //Pick a random location to move toward
 }
 function Die(){
 	var explosion = Instantiate(explosionParticle,this.transform.position,Quaternion.identity);
+	var mySound = new GameObject(); //Spawn explosion audio GameObject. Could've sworn there was a better way for this.
+	mySound.transform.position = this.transform.position;
+	mySound.AddComponent(AudioSource);
+	mySound.GetComponent(AudioSource).spatialBlend = 0.7;
+	mySound.GetComponent(AudioSource).PlayOneShot(explosionSound, 1);
+	GameObject.FindGameObjectWithTag("MainCamera").BroadcastMessage("ScreenShake");
+	Destroy(mySound, 10); //Cleanup!
 	Destroy(this.gameObject); //This should be changed, probably.
 }
 function maintainSpeed(){ //If we're going too fast, slow down!

@@ -104,5 +104,8 @@ function setInit(){ //check our initial prefs if not set set them.
 	if(!PlayerPrefs.HasKey("Controls")){
 		PlayerPrefs.SetInt("Controls",1);
 	}
+	if(!PlayerPrefs.HasKey("RoundTimer")){
+		PlayerPrefs.SetInt("RoundTimer",1);
+	}
 	PlayerPrefs.Save();
 }
