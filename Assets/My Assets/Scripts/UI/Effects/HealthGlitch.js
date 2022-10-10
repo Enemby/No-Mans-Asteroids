@@ -5,10 +5,16 @@ var maxHealth;
 var currentHealth;
 var glitchTime : float = 1;
 var stayTime : float = 0.2;
+public var shipTag = "SelectedShip";
+public var multiplayer : boolean = false;
 private var timer : float = 0;
 function UpdateReferences(){
-	if(GameObject.FindGameObjectWithTag("SelectedShip") != null){
-		var selectedShip = GameObject.FindGameObjectWithTag("SelectedShip").GetComponent("PlayerShip");
+	if(GameObject.FindGameObjectWithTag(shipTag) != null){
+
+		var selectedShip = GameObject.FindGameObjectWithTag(shipTag).GetComponent("PlayerShip");
+		if(multiplayer == true){
+			selectedShip = GameObject.FindGameObjectWithTag(shipTag).GetComponent("PlayerLocalMP");
+		}
 		maxHealth = selectedShip.maxHealth;
 		currentHealth = selectedShip.shipHealth;
 	}
@@ -70,6 +76,9 @@ function Update(){
 	UpdateReferences();
 	if(calculatePercentage() <= 50){
 		timerUpdate();
+	}
+	else{
+		setGlitch(false);
 	}
 	setNoiseIntensity();
 	if(PlayerPrefs.GetInt("EffectsCheck") == 1){

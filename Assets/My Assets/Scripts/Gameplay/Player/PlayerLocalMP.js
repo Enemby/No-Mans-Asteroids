@@ -6,6 +6,8 @@ var bullet : GameObject; //gameobject
 var myRigidbody : Rigidbody2D;
 var fireSound : AudioClip;
 var explosionSound : AudioClip;
+var damagedSound : AudioClip;
+var slowSound:AudioClip;
 var speed : float = 0.1; //How quickly do we accelerate?
 var turnSpeed : float = 1.5; //How fast can we rotate and change orientation?
 var cooldown : float = 0.5; //How long until we can fire our weapon?
@@ -57,6 +59,13 @@ function shipInput(){ //Check for button presses, act accordingly.
 		myRigidbody.AddForce(this.transform.up*Input.GetAxisRaw("VerticalP2")*speed); //2D physics
 		if(Input.GetButton("SlowP2")){
 			myRigidbody.velocity*=0.9;
+			if(myRigidbody.velocity.magnitude >= 10){
+				this.GetComponent(AudioSource).clip = slowSound;
+				if(this.GetComponent(AudioSource).isPlaying == false){
+					this.GetComponent(AudioSource).Play();
+					this.GetComponent(AudioSource).loop = true;
+				}
+			}
 		}
 		if(Input.GetButton("FireP2")){
 			Fire();
@@ -89,7 +98,14 @@ function OnCollisionEnter2D(mycol : Collision2D){ //Check if we're being hurt/sh
 	if(mycol.collider.tag == "Bullet"){
 		shipHealth-=0.5;
 		if(selected == true){
-			GameObject.FindGameObjectWithTag("MainCamera").BroadcastMessage("ScreenShake");
+			GameObject.Find("Main Camera2").BroadcastMessage("ScreenShake");
+			var mySound = new GameObject(); //Spawn explosion audio GameObject. Could've sworn there was a better way for this.
+			mySound.transform.position = this.transform.position;
+			mySound.AddComponent(AudioSource);
+			mySound.GetComponent(AudioSource).spatialBlend = 0;
+			mySound.GetComponent(AudioSource).pitch+=Random.Range(0,1)*0.1;
+			mySound.GetComponent(AudioSource).PlayOneShot(damagedSound, 1);
+			Destroy(mySound, 10); //Cleanup!
 		}
 		Destroy(mycol.gameObject);
 	}

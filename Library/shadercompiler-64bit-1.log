@@ -1,9 +1,3 @@
 Base path: C:/Program Files/Unity/Editor/Data
-Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-13368
+Pipe name: \\.\pipe\UnityShaderCompiler-64bit-1-17000
 Cmd: getPlatforms
-Cmd: compileSnippet
-  error: 2 plat 0 at (17): 'uint' : syntax error parse error\nCompiling Vertex program
-  api=0 type=0 insize=2007 outsize=0 kw= ok=0
-Cmd: compileSnippet
-  error: 2 plat 0 at (17): 'uint' : syntax error parse error\nCompiling Vertex program
-  api=0 type=0 insize=2007 outsize=0 kw= ok=0

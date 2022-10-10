@@ -321,6 +321,7 @@ function shipInput(){ //Check for button presses, act accordingly.
 	if(allowInput == true){
 		this.transform.localRotation.eulerAngles.z -= Input.GetAxisRaw("Horizontal") * turnSpeed *Time.deltaTime*14;
 		myRigidbody.AddForce(this.transform.up*Input.GetAxisRaw("Vertical")*speed); //2D physics
+		myRigidbody.AddForce(this.transform.right*Input.GetAxisRaw("Strafe")*speed*0.5); //2D physics
 		if(Input.GetButton("Slow")){
 			myRigidbody.velocity*=0.9;
 			if(myRigidbody.velocity.magnitude >= 10){
