@@ -15,8 +15,12 @@ function InstantActionSelect(){
 	instantActionPanel.active = true;
 	playPanel.active = false;
 }
+function showLoad(){
+	loadingText.active = true;
+}
 function CampaignPlay(){
 	if(PlayerPrefs.GetInt("tutorialCheck") == 1){
+		showLoad();
 		Application.LoadLevel(levelToLoad);
 	}
 	/*
@@ -76,6 +80,7 @@ function OldUpdate(){
 	}
 }
 function LoadLevel(myLevel : String){
+	showLoad();
 	Application.LoadLevel(myLevel);
 }
 function hideNewbieCheck(){
