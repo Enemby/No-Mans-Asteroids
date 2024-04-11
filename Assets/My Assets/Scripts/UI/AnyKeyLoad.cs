@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -22,7 +23,9 @@ public partial class AnyKeyLoad : MonoBehaviour
                 this.timer = this.timer - (Time.deltaTime * this.speed);
             }
             this.timer = Mathf.Clamp(this.timer, 0, 1);
-            this.GetComponent(UI.Text).color.a = (error) this.timer;
+            Color myCol = GetComponent<Text>().color;
+            myCol.a = timer;
+            GetComponent<Text>().color = myCol;
             if (this.timer == 1)
             {
                 this.timerstate = !this.timerstate;
