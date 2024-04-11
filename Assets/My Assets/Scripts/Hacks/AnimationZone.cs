@@ -41,12 +41,12 @@ public partial class AnimationZone : MonoBehaviour
         //Toggle AllowInput
         if (mybool == true)
         {
-            targetObject.GetComponent("PlayerShip").allowInput = true;
+            targetObject.GetComponent<PlayerShip>().allowInput = true;
         }
         else
         {
             //alreadyTriggered = true;
-            targetObject.GetComponent("PlayerShip").allowInput = false;
+            targetObject.GetComponent<PlayerShip>().allowInput = false;
         }
     }
 
