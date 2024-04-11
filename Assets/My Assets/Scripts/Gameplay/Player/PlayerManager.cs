@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
-public partial class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
     //Manages all of our basic game variables and UI.
     public int minerals; //How much money do we got, homie?
     public GameObject player; //Who are we looking at, cuz?
-    public UI.Text mineralsUI;
+    public Text mineralsUI;
     public GameObject controlsUI;
-    public UI.Text aiUI;
+    public Text aiUI;
     public AIMode myAI;
-    public UI.Text squadUI;
+    public Text squadUI;
     //var myOptions :GameObject;
     public virtual void Start()
     {
