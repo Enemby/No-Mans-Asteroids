@@ -14,7 +14,7 @@ public partial class switchSquad : MonoBehaviour
             int i = 0;
             while (i < this.transform.childCount)
             {
-                if (this.transform.GetChild(i).GetComponent("SquadManager").squadSelected == true)
+                if (this.transform.GetChild(i).GetComponent<SquadManager>().squadSelected == true)
                 {
                     this.selectedIndex = i;
                     this.squadSelected = true;
@@ -24,7 +24,7 @@ public partial class switchSquad : MonoBehaviour
             if (this.squadSelected == false) //Nothing is selected! Let's pick something! :D
             {
                 this.selectedIndex = 0;
-                this.transform.GetChild(0).GetComponent("SquadManager").squadSelected = true;
+                this.transform.GetChild(0).GetComponent<SquadManager>().squadSelected = true;
             }
         }
     }
@@ -33,8 +33,8 @@ public partial class switchSquad : MonoBehaviour
     {
         if (this.transform.childCount > 0)
         {
-            this.transform.GetChild(this.selectedIndex).GetComponent("SquadManager").squadSelected = false;
-            this.transform.GetChild(this.selectedIndex).GetComponent("SquadManager").BroadcastMessage("clearSelection");
+            this.transform.GetChild(this.selectedIndex).GetComponent<SquadManager>().squadSelected = false;
+            this.transform.GetChild(this.selectedIndex).GetComponent<SquadManager>().BroadcastMessage("clearSelection");
             if (this.selectedIndex == (this.transform.childCount - 1))
             {
                 this.selectedIndex = 0;
@@ -46,7 +46,7 @@ public partial class switchSquad : MonoBehaviour
                     this.selectedIndex = this.selectedIndex + 1;
                 }
             }
-            this.transform.GetChild(this.selectedIndex).GetComponent("SquadManager").squadSelected = true;
+            this.transform.GetChild(this.selectedIndex).GetComponent<SquadManager>().squadSelected = true;
         }
     }
 
