@@ -64,7 +64,7 @@ public partial class Options : MonoBehaviour
 
     public virtual void quitToTitle()
     {
-        if (!(Application.loadedLevel == "menu"))
+        if (!(Application.loadedLevel == 0))
         {
             Application.LoadLevel("menu");
         }
