@@ -2,25 +2,25 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public partial class destroyTime : MonoBehaviour
+public class destroyTime : MonoBehaviour
 {
-    public float destroyTime;
+    public float destroyT;
     public virtual void Start()
     {
     }
 
     public virtual void Update()
     {
-        this.destroyTime = this.destroyTime - Time.deltaTime;
-        if (this.destroyTime <= 0)
+        this.destroyT = this.destroyT - Time.deltaTime;
+        if (this.destroyT <= 0)
         {
-            UnityEngine.Object.Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 
     public destroyTime()
     {
-        this.destroyTime = 7.5f;
+        this.destroyT = 7.5f;
     }
 
 }
