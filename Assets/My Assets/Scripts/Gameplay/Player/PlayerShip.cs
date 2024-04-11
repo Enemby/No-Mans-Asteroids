@@ -51,10 +51,12 @@ public partial class PlayerShip : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("SelectedShip") != null)
         {
             GameObject target = GameObject.FindGameObjectWithTag("SelectedShip");
-            Component targetRB = target.GetComponent("Rigidbody2D");
+            Rigidbody2D targetRB = target.GetComponent<Rigidbody2D>();
             //this.transform.LookAt(target.transform);
             this.transform.up = target.transform.position - this.transform.position; //Lazy 2D look at
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
             this.myRigidbody.AddForce(this.transform.up * this.speed);
             if (Vector3.Distance(this.transform.position, target.transform.position) <= 20)
             {
@@ -131,7 +133,7 @@ public partial class PlayerShip : MonoBehaviour
             if (targets.Length > 0)
             {
                 int lowestDistance = 90;
-                object ourTarget = null; //Which ship array index?
+                int ourTarget = -50; //Which ship array index?
                 int i = 0;
                 while (i < targets.Length) //Scan through enemies
                 {
@@ -142,7 +144,7 @@ public partial class PlayerShip : MonoBehaviour
                     }
                     i++;
                 }
-                if (!(ourTarget == null))
+                if (!(ourTarget == -50))
                 {
                     this.target = targets[ourTarget]; //Target found. Let's move on to the next thing!
                 }
@@ -162,7 +164,7 @@ public partial class PlayerShip : MonoBehaviour
                 if (targets.Length > 0)
                 {
                     int lowestDistance2 = 90;
-                    object ourTarget2 = null; //Which ship array index?
+                    int ourTarget2 = -50; //Which ship array index?
                     int i2 = 0;
                     while (i2 < targets.Length) //Scan through enemies
                     {
@@ -173,7 +175,7 @@ public partial class PlayerShip : MonoBehaviour
                         }
                         i2++;
                     }
-                    if (!(ourTarget2 == null))
+                    if (!(ourTarget2 == -50))
                     {
                         this.target = targets[ourTarget2]; //Target found. Let's move on to the next thing!
                     }
@@ -196,7 +198,9 @@ public partial class PlayerShip : MonoBehaviour
         if (this.target != null)
         {
             this.transform.up = this.target.transform.position - this.transform.position;
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
             this.Fire(); //Wait, is it really that easy?
         }
         else
@@ -270,7 +274,9 @@ public partial class PlayerShip : MonoBehaviour
         if (this.target != null)
         {
             this.transform.up = this.target.transform.position - this.transform.position; //Lazy 2D look at
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
             this.myRigidbody.AddForce(this.transform.up * this.speed);
             if (Vector3.Distance(this.transform.position, this.target.transform.position) <= 5)
             {
@@ -292,7 +298,7 @@ public partial class PlayerShip : MonoBehaviour
 					}
 					*/    public virtual void myAIUpdate() //Check AI Mode, Ship Type, and act accordingly.
     {
-        object myMode = GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").myAI;
+        AIMode myMode = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().myAI;
         if (this.myType == (ShipType) 1) //Harvester
         {
             if (this.harvesterAttached == false)
@@ -305,13 +311,13 @@ public partial class PlayerShip : MonoBehaviour
         }
         else
         {
-            if (myMode == 2) //Drift
+            if (myMode == AIMode.Drift) //Drift
             {
             }
             else
             {
                 //Do Nothing
-                if (myMode == 1) //Follow
+                if (myMode == AIMode.Follow) //Follow
                 {
                     this.AIFollowPlayer();
                     this.maintainSpeed();
@@ -390,12 +396,12 @@ public partial class PlayerShip : MonoBehaviour
             {
                 if ((this.transform.parent.gameObject.tag == "MineralAsteroid") || (this.transform.parent.gameObject.tag == "Asteroid")) //We can harvest minerals
                 {
-                    if (this.transform.parent.gameObject.GetComponent("Asteroid").minerals > 0)
+                    if (this.transform.parent.gameObject.GetComponent<Asteroid>().minerals > 0)
                     {
                         if (Time.deltaTime > 0) //Limit it by time, not framerate
                         {
-                            GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals = ((int) GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals) + 1;
-                            this.transform.parent.gameObject.GetComponent("Asteroid").minerals = ((int) this.transform.parent.gameObject.GetComponent("Asteroid").minerals) - 1;
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().minerals = ((int) GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().minerals) + 1;
+                            this.transform.parent.gameObject.GetComponent<Asteroid>().minerals = ((int) this.transform.parent.gameObject.GetComponent<Asteroid>().minerals) - 1;
                         }
                     }
                     else
@@ -420,7 +426,8 @@ public partial class PlayerShip : MonoBehaviour
         //Movement
         if (this.allowInput == true)
         {
-            this.transform.localRotation.eulerAngles.z = this.transform.localRotation.eulerAngles.z - (((Input.GetAxisRaw("Horizontal") * this.turnSpeed) * Time.deltaTime) * 14);
+            Vector3 myEuler = transform.localRotation.eulerAngles;
+            myEuler.z = myEuler.z - (((Input.GetAxisRaw("Horizontal") * this.turnSpeed) * Time.deltaTime) * 14);
             this.myRigidbody.AddForce((this.transform.up * Input.GetAxisRaw("Vertical")) * this.speed); //2D physics
             this.myRigidbody.AddForce(((this.transform.right * Input.GetAxisRaw("Strafe")) * this.speed) * 0.5f); //2D physics
             if (Input.GetButton("Slow"))
@@ -525,7 +532,7 @@ public partial class PlayerShip : MonoBehaviour
 
     public virtual void shopInput()
     {
-        i = 1;
+        int i = 1;
         while (i < this.ships.Length) //This is the laziest fix ever. Let me explain why we start at 1.
         {
             //It's so we don't have to include 0 as an input, which our array starts at.
@@ -533,10 +540,10 @@ public partial class PlayerShip : MonoBehaviour
             //So we just pretend 0 doesn't exist, and extend our array arbitrarily. Lazy.
             if (Input.GetKeyDown(i + ""))
             {
-                if (GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals >= this.prices[i])
+                if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().minerals >= this.prices[i])
                 {
                     GameObject myShip = UnityEngine.Object.Instantiate(this.ships[i], this.transform.position + new Vector3(Random.Range(0, 5), Random.Range(0, 5), 0), Quaternion.identity);
-                    GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals = ((int) GameObject.FindGameObjectWithTag("Player").GetComponent("PlayerManager").minerals) - this.prices[i];
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().minerals = ((int) GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().minerals) - this.prices[i];
                     myShip.transform.parent = null; //Don't set parents, kids!
                     ((AudioSource) this.GetComponent(typeof(AudioSource))).PlayOneShot(this.buySound, 1);
                 }
@@ -579,32 +586,34 @@ public partial class PlayerShip : MonoBehaviour
     public virtual void setProgressUI()//Update capture graphics!
     {
         Transform progressBar = this.gameObject.transform.GetChild(0);
+        SpriteRenderer myRend = progressBar.GetComponent<SpriteRenderer>();
+        Color colorBar = myRend.color;
         if (this.captureProgress > 0)
         {
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = this.captureProgress / 5;
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = 0;
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+            colorBar.g = this.captureProgress / 5;
+            colorBar.r = 0;
+            colorBar.a = this.interactTimer / 5;
         }
         else
         {
             if (this.captureProgress < 0)
             {
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = Mathf.Abs(this.captureProgress) / 5;
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = 0;
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+                colorBar.r = Mathf.Abs(this.captureProgress) / 5;
+                colorBar.g = 0;
+                colorBar.a = this.interactTimer / 5;
             }
             else
             {
-                if (progressBar == 0)
-                {
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.b = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+                if (progressBar == null)
+                { //TODO: Verify this works properly
+                    colorBar.r = 1;
+                    colorBar.g = 1;
+                    colorBar.b = 1;
+                    colorBar.a = this.interactTimer / 5;
                 }
                 else
                 {
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.b = 0;
+                    colorBar.b = 0;
                 }
             }
         }
