@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -42,7 +43,7 @@ public partial class MusicInstance : MonoBehaviour
 
     public virtual AudioClip pickRandomClip()
     {
-        object rand = null;
+        int rand;
         if (this.myClips.Length <= 1)
         {
             rand = Random.Range(0, this.myClips.Length + 1);
@@ -70,8 +71,8 @@ public partial class MusicInstance : MonoBehaviour
         GameObject myInfo = GameObject.FindGameObjectWithTag("MusicInfo");
         if (myInfo != null)
         {
-            myInfo.GetComponent(UI.Text).text = this.myNames[this.currentIndex];
-            myInfo.GetComponent("MusicInfo").BroadcastMessage("startPopUp");
+            myInfo.GetComponent<Text>().text = this.myNames[this.currentIndex];
+            myInfo.GetComponent<MusicInfo>().BroadcastMessage("startPopUp");
         }
     }
 
