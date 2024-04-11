@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -6,12 +7,12 @@ public partial class UpdateToggle : MonoBehaviour
 {
     public string myPref;
     public int truevalue;
-    public UI.Toggle myToggle;
+    public Toggle myToggle;
     public virtual void Start()
     {
         if (this.myToggle == false)
         {
-            this.myToggle = (error) this.GetComponent("UI.Toggle");
+            this.myToggle = this.GetComponent<Toggle>();
         }
         if (PlayerPrefs.HasKey(this.myPref))
         {
