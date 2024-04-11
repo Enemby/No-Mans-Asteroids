@@ -44,7 +44,7 @@ public partial class AICommander : MonoBehaviour
             Component[] myPStations = GameObject.Find("Base").GetComponentsInChildren(typeof(Transform));
             this.playerStations = new GameObject[GameObject.Find("Base").transform.childCount];
             int actualStations = 0;
-            i = 0;
+            int i = 0;
             while (i < (myPStations.Length - 1))
             {
                 if ((myPStations[i].gameObject.name == "Player Station(Clone)") || (myPStations[i].gameObject.name == "Player Station"))
@@ -61,11 +61,11 @@ public partial class AICommander : MonoBehaviour
     {
         if (this.myStations.Length == 1)
         {
-            i = 0;
+           int i = 0;
             while (i < this.myCurrentShips.Length)
             {
-                myObj = new GameObject();
-                myObj.transform.position = this.myStations[0].transform.position + (Random.insideUnitCircle * 200);
+                GameObject myObj = new GameObject();
+                myObj.transform.position = this.myStations[0].transform.position + (Vector3)(Random.insideUnitCircle * 200);
                 this.setShipTarget(this.myCurrentShips[i], myObj);
                 UnityEngine.Object.Destroy(myObj, 25);
                 i++;
@@ -73,10 +73,10 @@ public partial class AICommander : MonoBehaviour
         }
     }
 
-    public virtual GameObject closestTarget(GameObject[] targets, int lowestDistance)
+    public GameObject closestTarget(GameObject[] targets, int lowestDistance)
     {
         //var lowestDistance = 50; //Scan within  radius
-        object ourTarget = null; //Which ship array index?
+        int ourTarget = -50; //Which ship array index?
         int i = 0;
         while (i < targets.Length) //Scan through enemies
         {
@@ -87,9 +87,13 @@ public partial class AICommander : MonoBehaviour
             }
             i++;
         }
-        if (!(ourTarget == null))
+        if (!(ourTarget == -50))
         {
-            return targets[ourTarget]; //Target found. Let's move on to the next thing!
+            return targets[ourTarget];//Target found. Let's move on to the next thing!
+        }
+        else
+        {
+            return null;
         }
     }
 
@@ -107,7 +111,7 @@ public partial class AICommander : MonoBehaviour
     {
         if ((theShip.transform.tag == "Enemy") || (theShip.transform.tag == "SpikeEnemy"))//Cool, not a garbage var.
         {
-            theShip.GetComponent("enemyShip").target = theTarget;
+            theShip.GetComponent<enemyShip>().target = theTarget;
         }
     }
 
@@ -126,7 +130,7 @@ public partial class AICommander : MonoBehaviour
                     GameObject targetStation = this.closestTarget(this.neutralStations, 5000);
                     if (targetStation)
                     {
-                        i = 0;
+                       int i = 0;
                         while (i < everyShip.Length)
                         {
                             this.setShipTarget(everyShip[i], targetStation);
@@ -147,7 +151,7 @@ public partial class AICommander : MonoBehaviour
                 }
                 else
                 {
-                    i = 0;
+                   int i = 0;
                     while (i < this.myCurrentShips.Length)
                     {
                         if (this.playerStations.Length <= 0)
@@ -236,7 +240,7 @@ public partial class AICommander : MonoBehaviour
     {
         if (this.playerStations.Length >= 1)
         {
-            i = 0;
+           int i = 0;
             while (i < ((this.myCurrentShips.Length - this.myStations.Length) - 1))//Leave one ship out of the attack.
             {
                 this.setShipTarget(this.myCurrentShips[i].gameObject, this.playerStations[0].gameObject);
@@ -255,7 +259,7 @@ public partial class AICommander : MonoBehaviour
 
     public virtual void captureNeutralStation()
     {
-        i = 0;
+       int i = 0;
         while (i < ((this.myCurrentShips.Length - this.myStations.Length) - 1))//Leave one ship out of the attack.
         {
             this.setShipTarget(this.myCurrentShips[i].gameObject, this.neutralStations[0].gameObject);
@@ -268,7 +272,7 @@ public partial class AICommander : MonoBehaviour
     {
         if ((this.playerStations.Length >= 1) && (this.neutralStations.Length >= 1))
         {
-            i = 0;
+           int i = 0;
             while (i < (this.myCurrentShips.Length * 0.5f)) //attack PlayerStation
             {
                 this.setShipTarget(this.myCurrentShips[i].gameObject, this.playerStations[0].gameObject);
