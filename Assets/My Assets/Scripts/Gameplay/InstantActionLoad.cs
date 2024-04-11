@@ -20,11 +20,11 @@ public partial class InstantActionLoad : MonoBehaviour
 
     public virtual void setSettings() //Set Instant Action Preferences from the menu
     {
-        this.asteroidGen.GetComponent("generateField").asteroids = PlayerPrefs.GetInt("IA_ASTEROIDS");
-        this.asteroidGen.GetComponent("generateField").spawnRange = PlayerPrefs.GetInt("IA_DENSITY");
+        this.asteroidGen.GetComponent<generateFields>().asteroids = PlayerPrefs.GetInt("IA_ASTEROIDS");
+        this.asteroidGen.GetComponent<generateFields>().spawnRange = PlayerPrefs.GetInt("IA_DENSITY");
         if (this.eCommander)
         {
-            this.eCommander.GetComponent("AICommander").myType = PlayerPrefs.GetInt("IA_AITYPE");
+            this.eCommander.GetComponent<AICommander>().myType = (CommanderType)PlayerPrefs.GetInt("IA_AITYPE");
         }
         this.stationCount = PlayerPrefs.GetInt("IA_STATIONS");
     }
@@ -41,7 +41,7 @@ public partial class InstantActionLoad : MonoBehaviour
 
     public virtual void spawnMap()
     {
-        i = 0;
+        int i = 0;
         while (i < (((int) this.stationCount) - 1))
         {
             if (i == 0)
