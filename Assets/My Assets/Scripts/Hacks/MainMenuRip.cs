@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -15,7 +16,7 @@ public partial class MainMenuRip : MonoBehaviour
     {
         if (this.web.isDone)
         {
-            error mytext = this.GetComponent(UI.Text);
+            Text mytext = this.GetComponent<Text>();
             mytext.text = this.web.text;
         }
     }
