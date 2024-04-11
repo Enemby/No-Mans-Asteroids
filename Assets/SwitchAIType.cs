@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -6,7 +7,7 @@ public partial class SwitchAIType : MonoBehaviour
 {
     public int myValue;
     public string[] text;
-    public UI.Text myUI;
+    public Text myUI;
     public string myPref;
     public virtual void Start()
     {
