@@ -25,7 +25,9 @@ public partial class lookAtTargetTag2D : MonoBehaviour
         if (this.target != null)
         {
             this.transform.up = this.target.transform.position - this.transform.position; //Lazy 2D look at
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
         }
     }
 
