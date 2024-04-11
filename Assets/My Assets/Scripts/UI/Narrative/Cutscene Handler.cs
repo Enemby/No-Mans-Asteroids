@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public partial class Cutscene Handler : MonoBehaviour
+public partial class CutsceneHandler : MonoBehaviour
 {
     public GameObject[] ourSteps;
     public int interval;
@@ -25,7 +25,7 @@ public partial class Cutscene Handler : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("EffectsCheck") == 0)
         {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent("Tube").enabled = false;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Kino.Tube>().enabled = false;
         }
     }
 
