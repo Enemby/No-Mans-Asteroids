@@ -34,32 +34,34 @@ public partial class NeutalStation : MonoBehaviour
     public virtual void setProgressUI()//Update capture graphics!
     {
         Transform progressBar = this.gameObject.transform.GetChild(0);
+        SpriteRenderer myRend = progressBar.GetComponent<SpriteRenderer>();
+        Color colorBar = myRend.color;
         if (this.captureProgress > 0)
         {
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = this.captureProgress / 5;
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = 0;
-            ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+            colorBar.g = this.captureProgress / 5;
+            colorBar.r = 0;
+            colorBar.a = this.interactTimer / 5;
         }
         else
         {
             if (this.captureProgress < 0)
             {
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = Mathf.Abs(this.captureProgress) / 5;
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = 0;
-                ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+                colorBar.r = Mathf.Abs(this.captureProgress) / 5;
+                colorBar.g = 0;
+                colorBar.a = this.interactTimer / 5;
             }
             else
             {
-                if (progressBar == 0)
-                {
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.r = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.g = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.b = 1;
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.a = this.interactTimer / 5;
+                if (progressBar == null)
+                { //TODO: Verify this works properly
+                    colorBar.r = 1;
+                    colorBar.g = 1;
+                    colorBar.b = 1;
+                    colorBar.a = this.interactTimer / 5;
                 }
                 else
                 {
-                    ((SpriteRenderer) progressBar.GetComponent(typeof(SpriteRenderer))).color.b = 0;
+                    colorBar.b = 0;
                 }
             }
         }
