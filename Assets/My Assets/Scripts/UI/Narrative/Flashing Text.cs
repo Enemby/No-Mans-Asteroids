@@ -1,18 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
-public partial class Flashing Text : MonoBehaviour
+public class FlashingText : MonoBehaviour
 {
     public Color ColorA;
     public Color ColorB;
     public float blendTime;
-    public UI.Text myText;
+    public Text myText;
     public virtual void Start()
     {
         if (this.myText == null)
         {
-            this.myText = GetComponent(UI.Text);
+            this.myText = GetComponent<Text>();
         }
     }
 
@@ -21,7 +22,7 @@ public partial class Flashing Text : MonoBehaviour
         this.myText.color = Color.Lerp(this.ColorA, this.ColorB, Mathf.PingPong(Time.time * this.blendTime, 1));
     }
 
-    public Flashing Text()
+    public FlashingText()
     {
         this.blendTime = 0.5f;
     }
