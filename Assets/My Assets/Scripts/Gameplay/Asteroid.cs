@@ -19,7 +19,7 @@ public partial class Asteroid : MonoBehaviour
             UnityEngine.Object.Destroy(myCol.gameObject);
             if (this.gameObject.transform.childCount > 0)
             {
-                i = 0;
+                int i = 0;
                 while (i < this.gameObject.transform.childCount)
                 {
                     if ((this.gameObject.transform.GetChild(i).gameObject.tag == "Ship") || (this.gameObject.transform.GetChild(i).gameObject.tag == "SelectedShip"))
@@ -31,12 +31,12 @@ public partial class Asteroid : MonoBehaviour
             }
             GameObject smallAsteroid1 = UnityEngine.Object.Instantiate(this.gameObject, this.transform.position, Quaternion.identity);
             GameObject smallAsteroid2 = UnityEngine.Object.Instantiate(this.gameObject, this.transform.position, Quaternion.identity);
-            smallAsteroid1.GetComponent("Asteroid").randomMinerals = false;
-            smallAsteroid2.GetComponent("Asteroid").randomMinerals = false;
+            smallAsteroid1.GetComponent<Asteroid>().randomMinerals = false;
+            smallAsteroid2.GetComponent<Asteroid>().randomMinerals = false;
             smallAsteroid1.transform.localScale = this.transform.localScale * this.hitScaleFactor;
             smallAsteroid2.transform.localScale = this.transform.localScale * this.hitScaleFactor;
-            smallAsteroid1.GetComponent("Asteroid").minerals = this.minerals * 0.5f;
-            smallAsteroid2.GetComponent("Asteroid").minerals = this.minerals * 0.5f;
+            smallAsteroid1.GetComponent<Asteroid>().minerals = (int)(minerals * 0.5f);
+            smallAsteroid2.GetComponent<Asteroid>().minerals = (int)(minerals * 0.5f);
             UnityEngine.Object.Destroy(this.gameObject);
         }
     }
@@ -56,10 +56,12 @@ public partial class Asteroid : MonoBehaviour
         this.percentage = this.startMinerals / this.minerals;
         this.percentage = this.percentage - 1;
         this.percentage = 1 - this.percentage; //Sleepy me did most of this, I promise.
-        ((SpriteRenderer) this.transform.GetChild(0).GetComponent(typeof(SpriteRenderer))).color.a = 255 * this.percentage;
+        Color myCol = transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+        myCol.a = 255 * this.percentage;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = myCol;
         if (this.myRB == null)
         {
-            this.myRB = (Rigidbody2D) this.GetComponent("Rigidbody2D");
+            this.myRB = (Rigidbody2D) this.GetComponent<Rigidbody2D>();
         }
         this.InvokeRepeating("updateUI", 0.1f, 0.5f + (Random.Range(1, 20) * 0.1f));
     }
@@ -73,7 +75,9 @@ public partial class Asteroid : MonoBehaviour
                 if (this.minerals <= 0)
                 {
                     this.transform.tag = "Asteroid"; //Because otherwise a Harvester may get stuck!
-                    ((SpriteRenderer) this.transform.GetChild(0).GetComponent(typeof(SpriteRenderer))).color.a = 0;
+                    Color myCol = transform.GetChild(0).GetComponent<SpriteRenderer>().color;
+                    myCol.a = 0;
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().color = myCol;
                     this.active = false;
                 }
                 else
