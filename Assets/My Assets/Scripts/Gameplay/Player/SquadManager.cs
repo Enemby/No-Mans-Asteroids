@@ -46,7 +46,7 @@ public partial class SquadManager : MonoBehaviour
 
     /*
 			for(var i = 0;i < this.transform.childCount;i++){
-				if(this.transform.GetChild(i).GetComponent("PlayerShip").selected == true){
+				if(this.transform.GetChild(i).GetComponent<PlayerShip>().selected == true){
 					selectedIndex = i;
 					shipSelected = true;
 				}
@@ -57,20 +57,20 @@ public partial class SquadManager : MonoBehaviour
         {
             if (this.transform.GetChild(this.selectedIndex) != null)
             {
-                if (this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip"))
+                if (this.transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>())
                 {
-                    this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip").selected = true;
+                    this.transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>().selected = true;
                 }
                 else
                 {
-                    this.transform.GetChild(this.selectedIndex).GetComponent("PlayerLocalMP").selected = true;
+                    this.transform.GetChild(this.selectedIndex).GetComponent<PlayerLocalMP>().selected = true;
                 }
                 this.shipSelected = true;
             }
             else
             {
                 this.selectedIndex = 0;
-                this.transform.GetChild(0).GetComponent("PlayerShip").selected = true;
+                this.transform.GetChild(0).GetComponent<PlayerShip>().selected = true;
                 this.shipSelected = true;
             }
         }
@@ -84,13 +84,13 @@ public partial class SquadManager : MonoBehaviour
             int i = 0;
             while (i < this.transform.childCount)
             {
-                if (this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip"))
+                if (this.transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>())
                 {
-                    this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip").selected == false;
+                    transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>().selected = false;
                 }
-                if (this.transform.GetChild(i).GetComponent("PlayerShip"))
+                if (this.transform.GetChild(i).GetComponent<PlayerShip>())
                 {
-                    this.transform.GetChild(i).GetComponent("PlayerShip").selected == false;
+                    this.transform.GetChild(i).GetComponent<PlayerShip>().selected = false;
                 }
                 i++;
             }
@@ -104,11 +104,11 @@ public partial class SquadManager : MonoBehaviour
             this.selectedShip = this.transform.GetChild(this.selectedIndex).gameObject;
             if (this.myCam == null)
             {
-                GameObject.FindGameObjectWithTag("MainCamera").GetComponent("Follow Player").target = this.selectedShip;
+                GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FollowPlayer>().target = this.selectedShip;
             }
             else
             {
-                this.myCam.GetComponent("Follow Player").target = this.selectedShip;
+                this.myCam.GetComponent<FollowPlayer>().target = this.selectedShip;
             }
         }
     }
@@ -117,7 +117,7 @@ public partial class SquadManager : MonoBehaviour
     {
         if (this.transform.childCount > 0)
         {
-            this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip").selected = false;
+            this.transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>().selected = false;
             if (this.selectedIndex == (this.transform.childCount - 1))
             {
                 this.selectedIndex = 0;
@@ -129,7 +129,7 @@ public partial class SquadManager : MonoBehaviour
                     this.selectedIndex = this.selectedIndex + 1;
                 }
             }
-            this.transform.GetChild(this.selectedIndex).GetComponent("PlayerShip").selected = true;
+            this.transform.GetChild(this.selectedIndex).GetComponent<PlayerShip>().selected = true;
         }
     }
 
