@@ -76,7 +76,7 @@ public partial class enemyShip : MonoBehaviour
         return Vector3.Distance(this.transform.position, player.transform.position);
     }
 
-    public virtual object spawnEscalation(float distance) //Check distance, and spawn accordingly
+    public int spawnEscalation(float distance) //Check distance, and spawn accordingly
     {
         int i = 0;
         while (i < (this.shipSpawns.Length - 1)) //Iterate through array
@@ -88,10 +88,11 @@ public partial class enemyShip : MonoBehaviour
             else
             {
                 //This doesn't work right. But it works well enough..
-                return null;
+                return -50;
             }
             i++;
         }
+        return -50;
     }
 
     public virtual void scanForTargets() //Look for enemies within a reasonable range.
@@ -100,7 +101,7 @@ public partial class enemyShip : MonoBehaviour
         if (targets.Length > 0)
         {
             int lowestDistance = 150;
-            object ourTarget = null; //Which ship array index?
+            int ourTarget = -50; //Which ship array index?
             int i = 0;
             while (i < targets.Length) //Scan through enemies
             {
@@ -118,7 +119,7 @@ public partial class enemyShip : MonoBehaviour
                     this.target = GameObject.FindGameObjectWithTag("SelectedShip").gameObject;
                 }
             }
-            if (!(ourTarget == null))
+            if (!(ourTarget == -50))
             {
                 this.target = targets[ourTarget]; //Target found. Let's move on to the next thing!
             }
@@ -200,7 +201,9 @@ public partial class enemyShip : MonoBehaviour
                 //var targetTransform = target.transform.position - transform.position;
                 //this.transform.up = Vector3.MoveTowards(this.transform.up,targetTransform,0.001 * Time.deltaTime);
                 this.transform.up = this.target.transform.position - this.transform.position; //Lazy 2D look at
-                this.transform.rotation.eulerAngles.x = 0;
+                Vector3 myEuler = transform.rotation.eulerAngles;
+                myEuler.x = 0;
+                this.transform.eulerAngles = myEuler;
                 ((Rigidbody2D) this.GetComponent(typeof(Rigidbody2D))).AddForce(this.transform.up * this.speed);
             }
         }
@@ -212,7 +215,8 @@ public partial class enemyShip : MonoBehaviour
                 {
                     if ((GameObject.FindGameObjectsWithTag("Enemy").Length + GameObject.FindGameObjectsWithTag("SpikeEnemy").Length) <= 65) //Don't spawn mroe than we can handle
                     {
-                        GameObject myShip = UnityEngine.Object.Instantiate(this.shipSpawns[this.spawnEscalation(this.getPlayerDistance())], this.transform.position, Quaternion.identity); //This is kind of hacky...
+                        GameObject myObj = shipSpawns[spawnEscalation(getPlayerDistance())];
+                        GameObject myShip = Instantiate(myObj, this.transform.position, Quaternion.identity); //This is kind of hacky...
                         this.Fire(); //Reset fire timer
                     }
                 }
@@ -258,7 +262,9 @@ public partial class enemyShip : MonoBehaviour
         if (this.target != null)
         {
             this.transform.up = this.target.transform.position - this.transform.position; //Lazy 2D look at
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.rotation.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
             this.myRigidbody.AddForce(this.transform.up * this.speed);
             if (Vector3.Distance(this.transform.position, this.target.transform.position) <= 5)
             {
@@ -295,8 +301,8 @@ public partial class enemyShip : MonoBehaviour
 
     public virtual void randomPatrol() //Pick a random location to move toward
     {
-        myObj = new GameObject();
-        myObj.transform.position = Vector3.zero + (Random.insideUnitCircle * 200);
+        GameObject myObj = null;
+        myObj.transform.position = Vector3.zero + (Vector3)(Random.insideUnitCircle * 200);
         this.target = myObj;
         UnityEngine.Object.Destroy(myObj, 25);
     }
