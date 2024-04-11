@@ -77,7 +77,8 @@ public partial class PlayerLocalMP : MonoBehaviour
         //Movement
         if (this.allowInput == true)
         {
-            this.transform.localRotation.eulerAngles.z = this.transform.localRotation.eulerAngles.z - (((Input.GetAxisRaw("HorizontalP2") * this.turnSpeed) * Time.deltaTime) * 14);
+            Vector3 myEuler = transform.localRotation.eulerAngles;
+            myEuler.z = myEuler.z - (((Input.GetAxisRaw("HorizontalP2") * this.turnSpeed) * Time.deltaTime) * 14);
             this.myRigidbody.AddForce((this.transform.up * Input.GetAxisRaw("VerticalP2")) * this.speed); //2D physics
             if (Input.GetButton("SlowP2"))
             {
@@ -96,6 +97,7 @@ public partial class PlayerLocalMP : MonoBehaviour
             {
                 this.Fire();
             }
+            transform.localEulerAngles = myEuler;
         }
     }
 
