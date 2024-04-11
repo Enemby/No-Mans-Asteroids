@@ -27,14 +27,16 @@ public partial class LookAtNearestEnemy : MonoBehaviour
         if (this.target != null)
         {
             this.transform.up = this.target.transform.position - this.transform.position; //Lazy 2D look at
-            this.transform.rotation.eulerAngles.x = 0;
+            Vector3 myEuler = transform.eulerAngles;
+            myEuler.x = 0;
+            transform.eulerAngles = myEuler;
         }
     }
 
     public virtual void closestTarget(GameObject[] targets, int lowestDistance)
     {
         //var lowestDistance = 50; //Scan within  radius
-        object ourTarget = null; //Which ship array index?
+        int ourTarget = -50; //Which ship array index?
         int i = 0;
         while (i < targets.Length) //Scan through enemies
         {
@@ -45,7 +47,7 @@ public partial class LookAtNearestEnemy : MonoBehaviour
             }
             i++;
         }
-        if (!(ourTarget == null))
+        if (!(ourTarget == -50))
         {
             this.target = targets[ourTarget]; //Target found. Let's move on to the next thing!
         }

@@ -11,15 +11,17 @@ public partial class Fade : MonoBehaviour
     public string sceneName;
     public virtual void Update()
     {
+        Color myCol = ((SpriteRenderer)this.GetComponent(typeof(SpriteRenderer))).color;
         if (this.fadeIn == false)
         {
-            ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a = ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a - this.fadeSpeed;
+            
+            myCol.a = ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a - this.fadeSpeed;
         }
         else
         {
-            ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a = ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a + this.fadeSpeed;
+            myCol.a = ((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a + this.fadeSpeed;
         }
-        if ((((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a <= 0) || (((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a >= 1))
+        if ((myCol.a <= 0) || (((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))).color.a >= 1))
         {
             if (this.loadScene == true)
             {
@@ -27,9 +29,10 @@ public partial class Fade : MonoBehaviour
             }
             else
             {
-                UnityEngine.Object.Destroy(this.gameObject, 50); //Make sure we clean up eventually...
+               Destroy(this.gameObject, 50); //Make sure we clean up eventually...
             }
         }
+        ((SpriteRenderer)this.GetComponent(typeof(SpriteRenderer))).color = myCol;
     }
 
     public Fade()

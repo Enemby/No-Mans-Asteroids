@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -10,6 +11,7 @@ public partial class FadeUIElement : MonoBehaviour
     public float speed;
     public virtual void Update()
     {
+        Color myCol = this.GetComponent<Graphic>().color;
         if ((this.fade == true) && (this.fadevalue < this.targetAlpha))
         {
             this.fadevalue = this.fadevalue + (Time.deltaTime * this.speed);
@@ -19,7 +21,8 @@ public partial class FadeUIElement : MonoBehaviour
             this.fadevalue = this.fadevalue - (Time.deltaTime * this.speed);
         }
         this.capFade();
-        this.GetComponent("Graphic").color.a = this.fadevalue;
+        myCol.a = this.fadevalue;
+        this.GetComponent<Graphic>().color = myCol;
     }
 
     public virtual void vignetteToggle(int mode)
