@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -6,7 +7,7 @@ public partial class findNeutralStations : MonoBehaviour
 {
     public GameObject[] targetStations;
     public GameObject target;
-    private object myRenderer;
+    private SpriteRenderer myRenderer;
     public virtual void Start()
     {
         if (((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))) != null)
@@ -15,13 +16,14 @@ public partial class findNeutralStations : MonoBehaviour
         }
         else
         {
-            this.myRenderer = this.GetComponent(UI.Image);
+            this.myRenderer.sprite = GetComponent<Image>().sprite;
         }
     }
 
     public virtual void FixedUpdate()
     {
         GameObject[] targetStations = GameObject.FindGameObjectsWithTag("NeutralStation");
+        Color myCol = myRenderer.color;
         if (targetStations.Length != 0)
         {
             this.closestTarget(targetStations, 2000);
@@ -69,7 +71,9 @@ public partial class findNeutralStations : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("SelectedShip") != null)
             {
                 this.transform.up = this.target.transform.position - GameObject.FindGameObjectWithTag("SelectedShip").transform.position; //Lazy 2D look at
-                this.transform.rotation.eulerAngles.x = 0;
+                Vector3 myEuler = transform.eulerAngles;
+                myEuler.x = 0;
+                transform.eulerAngles = myEuler;
             }
         }
     }
@@ -77,7 +81,7 @@ public partial class findNeutralStations : MonoBehaviour
     public virtual void closestTarget(GameObject[] targets, int lowestDistance)
     {
         //var lowestDistance = 50; //Scan within  radius
-        object ourTarget = null; //Which ship array index?
+        int ourTarget = -50; //Which ship array index?
         int i = 0;
         while (i < targets.Length) //Scan through enemies
         {
