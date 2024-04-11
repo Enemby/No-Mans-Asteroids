@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
 using System.Collections;
 
 [System.Serializable]
 public partial class HealthGlitch : MonoBehaviour
 {
     //Check health percentage, do stuff.
-    public MonoBehaviour noiseScript;
-    public MonoBehaviour glitchScript;
-    public object maxHealth;
-    public object currentHealth;
+    public NoiseAndScratches noiseScript;
+    public Kino.AnalogGlitch glitchScript;
+    public float maxHealth;
+    public float currentHealth;
     public float glitchTime;
     public float stayTime;
     public string shipTag;
@@ -18,13 +19,15 @@ public partial class HealthGlitch : MonoBehaviour
     {
         if (GameObject.FindGameObjectWithTag(this.shipTag) != null)
         {
-            Component selectedShip = GameObject.FindGameObjectWithTag(this.shipTag).GetComponent("PlayerShip");
+            PlayerShip selectedShip = GameObject.FindGameObjectWithTag(this.shipTag).GetComponent<PlayerShip>();
+            maxHealth = selectedShip.maxHealth;
+            currentHealth = selectedShip.shipHealth;
             if (this.multiplayer == true)
             {
-                selectedShip = GameObject.FindGameObjectWithTag(this.shipTag).GetComponent("PlayerLocalMP");
+                PlayerLocalMP selectedShip2 = GameObject.FindGameObjectWithTag(this.shipTag).GetComponent<PlayerLocalMP>();
+                maxHealth = selectedShip2.maxHealth;
+                currentHealth = selectedShip2.shipHealth;
             }
-            this.maxHealth = selectedShip.maxHealth;
-            this.currentHealth = selectedShip.shipHealth;
         }
     }
 
@@ -45,13 +48,13 @@ public partial class HealthGlitch : MonoBehaviour
         }
     }
 
-    public virtual object calculatePercentage()
+    public int calculatePercentage()
     {
         if (!(this.currentHealth == null) && !(this.maxHealth == null))
         {
-            object percentage = this.currentHealth / this.maxHealth;
+            float percentage = this.currentHealth / this.maxHealth;
             percentage = ((int) percentage) * 100;
-            return percentage;
+            return (int)percentage;
         }
         else
         {
@@ -63,8 +66,8 @@ public partial class HealthGlitch : MonoBehaviour
     {
         if (myMode == true)
         {
-            this.glitchScript.colorDrift = 0.5f;
-            this.glitchScript.scanLineJitter = 0.3f;
+            glitchScript.colorDrift = 0.5f;
+            glitchScript.scanLineJitter = 0.3f;
         }
         else
         {
