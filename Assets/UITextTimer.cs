@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -17,7 +18,7 @@ public partial class UITextTimer : MonoBehaviour
             UnityEngine.Object.Destroy(this.gameObject);
         }
         int myInt = (int) this.timeToWait;
-        this.GetComponent(UI.Text).text = (this.myText + myInt) + "s";
+        this.GetComponent<Text>().text = (this.myText + myInt) + "s";
     }
 
     public UITextTimer()
