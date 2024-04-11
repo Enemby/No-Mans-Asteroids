@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -7,7 +8,7 @@ public partial class MusicInfo : MonoBehaviour
     public Color ColorA;
     public Color ColorB;
     public float blendTime;
-    public UI.Text myText;
+    public Text myText;
     public bool fade;
     public float timer;
     public virtual void startPopUp()
