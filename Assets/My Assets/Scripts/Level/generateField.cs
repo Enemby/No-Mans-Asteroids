@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public partial class generateField : MonoBehaviour
+public class generateFields : MonoBehaviour
 {
     public int asteroids;
     public float maxScale;
@@ -22,13 +22,15 @@ public partial class generateField : MonoBehaviour
             GameObject newAsteroid = UnityEngine.Object.Instantiate(this.myAsteroid, this.transform.position, Quaternion.identity);
             newAsteroid.transform.position = new Vector3(Random.Range(-this.spawnRange, this.spawnRange), Random.Range(-this.spawnRange, this.spawnRange), 0);
             float myScale = Random.Range(0.26f, this.maxScale);
-            newAsteroid.transform.localScale.x = myScale;
-            newAsteroid.transform.localScale.y = myScale;
+            Vector3 newRoid = newAsteroid.transform.localScale;
+            newRoid.x = myScale;
+            newRoid.y = myScale;
+            newAsteroid.transform.localScale = newRoid;
             i++;
         }
     }
 
-    public generateField()
+    public generateFields()
     {
         this.asteroids = 200;
         this.maxScale = 3;
