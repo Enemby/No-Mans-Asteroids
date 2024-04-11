@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
@@ -11,14 +12,14 @@ public partial class AutoText : MonoBehaviour
     public int progress;
     public bool fade;
     public AudioClip blipSound;
-    private UI.Text myText;
+    private Text myText;
     private int textLength;
     public virtual void Start()
     {
-        this.myText = GetComponent(UI.Text);
-        this.word = GetComponent(UI.Text).text;
+        this.myText = GetComponent<Text>();
+        this.word = GetComponent<Text>().text;
         this.textLength = (int) this.myText.text.Length;
-        GetComponent(UI.Text).text = "";
+        GetComponent<Text>().text = "";
         this.StartCoroutine(this.TypeText());
         this.InvokeRepeating("finishCheck", 10, 3);
     }
@@ -40,7 +41,9 @@ public partial class AutoText : MonoBehaviour
 
     public virtual void fadeText()
     {
-        this.myText.color.a -= Time.deltaTime;
+        Color myCol = myText.color;
+        myCol.a -= Time.deltaTime;
+        myText.color = myCol;
         if (this.myText.color.a <= 0)
         {
             UnityEngine.Object.Destroy(this.gameObject);
@@ -60,36 +63,42 @@ public partial class AutoText : MonoBehaviour
         {
             switch (nextletter)
             {
-                case "@":
+                case '@':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     red = !red; //toggle red styling
                     green = false; //toggle green styling
                     magenta = false; //This is so weird shit doesn't happen.
                     gold = false;
-                case "#":
+                    break;
+                case '#':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     green = !green; //toggle green styling
                     magenta = false; //toggle green styling
                     red = false; //This is so weird shit doesn't happen.
                     gold = false;
-                case "$":
+                    break;
+                case '$':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     green = false; //toggle green styling
                     red = false; //This is so weird shit doesn't happen.
                     magenta = false;
                     gold = !gold;
-                case "%":
+                    break;
+                case '%':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     green = false; //toggle green styling
                     red = false; //This is so weird shit doesn't happen.
                     gold = false;
                     magenta = !magenta;
-                case "¬":
+                    break;
+                case '¬':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     bold = !bold; //toggle bold styling
-                case "/":
+                    break;
+                case '/':
                     ignore = true; //make sure this character isn't printed by ignoring it
                     italics = !italics; //toggle italic styling
+                    break;
             }
             string letter = nextletter.ToString();
             if (!ignore)
