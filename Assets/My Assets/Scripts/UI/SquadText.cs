@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [System.Serializable]
 public partial class SquadText : MonoBehaviour
 {
     public GameObject parentObj;
-    public UI.Text myText;
+    public Text myText;
     public int index;
     public virtual void Update()
     {
         if (this.parentObj != null)
         {
-            this.index = (int) this.parentObj.GetComponent("switchSquad").selectedIndex;
+            this.index = (int) this.parentObj.GetComponent<switchSquad>().selectedIndex;
         }
         this.updateText();
     }
