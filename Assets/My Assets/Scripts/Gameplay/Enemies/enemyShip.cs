@@ -301,7 +301,7 @@ public partial class enemyShip : MonoBehaviour
 
     public virtual void randomPatrol() //Pick a random location to move toward
     {
-        GameObject myObj = null;
+        GameObject myObj = new GameObject();
         myObj.transform.position = Vector3.zero + (Vector3)(Random.insideUnitCircle * 200);
         this.target = myObj;
         UnityEngine.Object.Destroy(myObj, 25);

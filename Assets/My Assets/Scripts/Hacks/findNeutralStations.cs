@@ -7,23 +7,15 @@ public partial class findNeutralStations : MonoBehaviour
 {
     public GameObject[] targetStations;
     public GameObject target;
-    private SpriteRenderer myRenderer;
+    private UnityEngine.UI.Image myRenderer;
     public virtual void Start()
     {
-        if (((SpriteRenderer) this.GetComponent(typeof(SpriteRenderer))) != null)
-        {
-            this.myRenderer = (SpriteRenderer) this.GetComponent(typeof(SpriteRenderer));
-        }
-        else
-        {
-            this.myRenderer.sprite = GetComponent<Image>().sprite;
-        }
+        myRenderer = GetComponent<UnityEngine.UI.Image>();
     }
 
     public virtual void FixedUpdate()
     {
         GameObject[] targetStations = GameObject.FindGameObjectsWithTag("NeutralStation");
-        Color myCol = myRenderer.color;
         if (targetStations.Length != 0)
         {
             this.closestTarget(targetStations, 2000);

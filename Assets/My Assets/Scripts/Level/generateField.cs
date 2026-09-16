@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class generateFields : MonoBehaviour
+public class generateField : MonoBehaviour
 {
     public int asteroids;
     public float maxScale;
@@ -11,10 +11,10 @@ public class generateFields : MonoBehaviour
     public virtual void Start()
     {
         Random.seed = (int) System.DateTime.Now.Ticks;
-        this.generateField();
+        this.generateMyFields();
     }
 
-    public virtual void generateField() //Goal: generate an asteroid field.
+    public virtual void generateMyFields() //Goal: generate an asteroid field.
     {
         int i = 0;
         while (i < this.asteroids)
@@ -30,11 +30,12 @@ public class generateFields : MonoBehaviour
         }
     }
 
-    public generateFields()
+    public  bool generateFields()
     {
         this.asteroids = 200;
         this.maxScale = 3;
         this.spawnRange = 10000;
+        return true;
     }
 
 }

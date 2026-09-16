@@ -86,8 +86,8 @@ public partial class HealthGlitch : MonoBehaviour
         else
         {
              //This one problem, took me a full hour to figure out. (With help)
-            this.noiseScript.grainIntensityMax = ((float) (100 / (int) this.calculatePercentage())) * 0.4f;//0.6 is full power
-            this.noiseScript.scratchIntensityMax = 10 / (int) this.calculatePercentage();
+            this.noiseScript.grainIntensityMax = ((float) (100 / (float) this.calculatePercentage())) * 0.4f;//0.6 is full power
+            this.noiseScript.scratchIntensityMax = 10 / (float) this.calculatePercentage();
         }
     }
 
